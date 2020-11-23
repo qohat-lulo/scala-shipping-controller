@@ -16,7 +16,6 @@ lazy val commonSettings = Seq(
   scalaVersion := "2.13.3",
   scalacOptions := options,
   scalaSource in Test := baseDirectory.value / "src/test/scala",
-  scalaSource in IntegrationTest := baseDirectory.value / "src/it/scala",
   scalafmtOnCompile in ThisBuild := true,
   autoCompilerPlugins in ThisBuild := true,
   assemblyMergeStrategy in assembly := {
@@ -149,9 +148,6 @@ lazy val infrastructure = (project in file("infra"))
 
 lazy val infra_files = (project in file("infra/files"))
   .settings(commonSettings: _*)
-  .configs(IntegrationTest)
-  .settings(inConfig(IntegrationTest)(Defaults.itSettings))
-  .settings(inConfig(IntegrationTest)(ScalafmtPlugin.scalafmtConfigSettings))
   .settings(
     name := "files",
     scalacOptions ++= options,
