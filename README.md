@@ -2,7 +2,7 @@
 
 _Application to control the shipments of lunch orders_
 
-## Comenzando 🚀
+## To Start 🚀
 
 _Clone the repository and run the next command to export the env vars configurations_
 
