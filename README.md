@@ -1,4 +1,4 @@
-# Shipping Controller
+# Scala Shipping Controller
 
 _Application to control the shipments of lunch orders_
 

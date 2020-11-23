@@ -50,17 +50,17 @@ final class RepoSpec extends SpecEffects {
       val effect = for {
         repo <- Repo.create[IO](config)
         result <- repo
-          .save(
-            Shipper(
-              Id("01"),
-              List(
-                Location(Abscissa(-2), Ordered(4), West),
-                Location(Abscissa(-1), Ordered(-1), West)
-              )
-            )
-          )
-          .compile
-          .toList
+                    .save(
+                      Shipper(
+                        Id("01"),
+                        List(
+                          Location(Abscissa(-2), Ordered(4), West),
+                          Location(Abscissa(-1), Ordered(-1), West)
+                        )
+                      )
+                    )
+                    .compile
+                    .toList
         assertion = result.size == 2
       } yield assert(assertion)
       effect.unsafeToFuture()
