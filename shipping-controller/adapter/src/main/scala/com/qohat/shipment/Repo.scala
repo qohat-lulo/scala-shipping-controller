@@ -14,13 +14,30 @@ final class Repo[F[_]: Async: FilesRW] private (
       .read(config.maxConcurrent)(config.inFolder)
       .map(toShipper)
 
-  override def save(shipper: Shipper): Stream[F, Unit] = ???
+  override def save(shipper: Shipper): Stream[F, Unit] =
+    FilesRW[F]
+      .write(
+        config.outFolder,
+        toFile(shipper)
+      )
 
   private def toShipper(file: File): Shipper =
     Shipper(
       Id(file.name.value),
       file.lines.map(line => move(line.value.toList))
     )
+
+  private def toFile(shipper: Shipper): File =
+    File(
+      Name(shipper.id.value),
+      shipper.locations
+        .map(fromLocation)
+        .map(_ + "\n")
+        .map(Line)
+    )
+
+  private def fromLocation(location: Location): String =
+    s"(${location.x}, ${location.y}) ${location.direction}"
 
 }
 
