@@ -16,7 +16,6 @@ final class Repo[F[_]: Async: FilesRW] private (
 
   override def save(shipper: Shipper): Stream[F, Unit] = ???
 
-
   private def toShipper(file: File): Shipper =
     Shipper(
       Id(file.name.value),
